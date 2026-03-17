@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Keto 4-Wekenplan — be-nl</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #07110b;
+      --bg-soft: #0d1c12;
+      --panel: rgba(17, 37, 24, 0.78);
+      --panel-strong: rgba(23, 49, 31, 0.92);
+      --border: rgba(206, 235, 104, 0.18);
+      --text: #f8fde7;
+      --muted: #bed1ad;
+      --green: #86d566;
+      --green-2: #4ba84f;
+      --yellow: #f0d763;
+      --yellow-2: #f7e78d;
+      --danger: #ffca77;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+      --radius-sm: 18px;
+      --max: 1280px;
+      --title-size: clamp(2.5rem, 6vw, 5.5rem);
+      --h2-size: clamp(1.8rem, 3vw, 3rem);
+      --h3-size: clamp(1.05rem, 1.8vw, 1.4rem);
+      --body-size: clamp(0.95rem, 1.1vw, 1.05rem);
+      --small-size: clamp(0.8rem, 0.95vw, 0.92rem);
+      --section-pad: clamp(1.5rem, 4vw, 4rem);
+      --gap: clamp(1rem, 2vw, 1.5rem);
+      --ease: cubic-bezier(.16,1,.3,1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, sans-serif;
+      font-size: var(--body-size);
+      line-height: 1.65;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 20%, rgba(134, 213, 102, 0.18), transparent 24%),
+        radial-gradient(circle at 85% 5%, rgba(240, 215, 99, 0.16), transparent 22%),
+        radial-gradient(circle at 70% 80%, rgba(75, 168, 79, 0.18), transparent 25%),
+        linear-gradient(180deg, #08150d 0%, #07110b 35%, #0a1710 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.5), transparent 65%);
+      opacity: .3;
+    }
+
+    a { color: inherit; }
+    .container { width: min(calc(100% - 2rem), var(--max)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky; top: 0; z-index: 40;
+      backdrop-filter: blur(18px);
+      background: rgba(7, 17, 11, 0.72);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .topbar-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 0.9rem 0;
+    }
+    .brand {
+      display: flex; align-items: center; gap: .8rem; font-weight: 700;
+      letter-spacing: .01em;
+    }
+    .brand-badge {
+      width: 40px; height: 40px; border-radius: 14px;
+      display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--green), var(--yellow));
+      color: #10200f; font-weight: 800;
+      box-shadow: 0 10px 30px rgba(134,213,102,.32);
+    }
+    .topnav {
+      display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .65rem;
+    }
+    .topnav a {
+      text-decoration: none;
+      font-size: .92rem;
+      color: var(--muted);
+      padding: .6rem .9rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.05);
+      transition: .25s var(--ease);
+    }
+    .topnav a:hover { color: var(--text); border-color: rgba(240,215,99,.25); transform: translateY(-2px); }
+
+    .hero {
+      position: relative;
+      padding: clamp(3rem, 8vw, 7rem) 0 2.5rem;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: clamp(1.5rem, 3vw, 3rem);
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .45rem .8rem; border-radius: 999px;
+      background: rgba(240, 215, 99, 0.1);
+      color: var(--yellow-2); border: 1px solid rgba(240,215,99,.18);
+      font-weight: 600; font-size: .9rem;
+      margin-bottom: 1rem;
+    }
+    h1, h2, h3 { margin: 0; font-family: Outfit, Inter, sans-serif; line-height: 1.08; }
+    h1 { font-size: var(--title-size); letter-spacing: -0.04em; max-width: 11ch; }
+    h2 { font-size: var(--h2-size); letter-spacing: -0.03em; margin-bottom: .9rem; }
+    h3 { font-size: var(--h3-size); margin-bottom: .55rem; }
+    .hero p.lead {
+      font-size: clamp(1.02rem, 1.35vw, 1.2rem);
+      color: var(--muted); max-width: 60ch; margin: 1.2rem 0 1.6rem;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
+    .button {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; padding: .85rem 1.15rem; border-radius: 999px;
+      text-decoration: none; font-weight: 700; border: 1px solid transparent;
+      transition: .25s var(--ease); box-shadow: var(--shadow);
+    }
+    .button-primary { background: linear-gradient(135deg, var(--green), var(--yellow)); color: #0d1a0d; }
+    .button-secondary { background: rgba(255,255,255,.04); color: var(--text); border-color: rgba(255,255,255,.08); box-shadow: none; }
+    .button:hover { transform: translateY(-2px) scale(1.01); }
+
+    .hero-panel {
+      position: relative;
+      background: linear-gradient(180deg, rgba(16,34,22,.96), rgba(11,25,16,.85));
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 6px);
+      padding: 1.2rem;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .hero-panel::after {
+      content: "";
+      position: absolute; inset: auto -15% -30% auto;
+      width: 250px; height: 250px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(240,215,99,.25), transparent 60%);
+      filter: blur(20px);
+      animation: float 8s ease-in-out infinite;
+    }
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .9rem;
+      margin-top: 1rem;
+    }
+    .metric {
+      padding: 1rem; border-radius: var(--radius-sm);
+      background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    }
+    .metric .value { font-family: Outfit, sans-serif; font-size: clamp(1.5rem, 3vw, 2.2rem); color: var(--yellow); }
+    .metric .label { color: var(--muted); font-size: var(--small-size); }
+
+    .section { padding: clamp(2.5rem, 6vw, 5rem) 0; }
+    .section-head { margin-bottom: 1.4rem; }
+    .section-copy { color: var(--muted); max-width: 68ch; }
+
+    .overview-grid, .rules-grid, .cards-grid, .week-grid, .supp-grid {
+      display: grid; gap: var(--gap);
+    }
+    .overview-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .rules-grid { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    .supp-grid { grid-template-columns: repeat(4, minmax(0,1fr)); }
+    .week-grid { grid-template-columns: repeat(2, minmax(0,1fr)); align-items: start; }
+
+    .card, .week-card, .callout {
+      position: relative;
+      padding: 1.2rem;
+      background: var(--panel);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card::before, .week-card::before, .callout::before {
+      content: "";
+      position: absolute; inset: 0 0 auto 0; height: 1px;
+      background: linear-gradient(90deg, rgba(134,213,102,0), rgba(134,213,102,.7), rgba(240,215,99,0));
+    }
+    .kpi { font-size: clamp(1.7rem, 2.8vw, 2.2rem); font-family: Outfit, sans-serif; color: var(--yellow); margin-bottom: .2rem; }
+    .muted { color: var(--muted); }
+    .tag-row { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0 0; }
+    .tag {
+      display: inline-flex; align-items: center; gap: .35rem;
+      padding: .42rem .72rem; border-radius: 999px;
+      background: rgba(134,213,102,.11); color: #d7f7c8;
+      border: 1px solid rgba(134,213,102,.16); font-size: .87rem; font-weight: 600;
+    }
+
+    .week-shell {
+      background: linear-gradient(180deg, rgba(12,27,17,.85), rgba(8,18,11,.8));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 30px; padding: 1.2rem;
+      box-shadow: var(--shadow);
+    }
+    .week-header {
+      display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem;
+      align-items: center; margin-bottom: 1rem;
+    }
+    .week-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .5rem .85rem; border-radius: 999px;
+      background: rgba(255,255,255,.05); color: var(--yellow-2); font-weight: 700;
+      border: 1px solid rgba(240,215,99,.14);
+    }
+    .week-note { color: var(--muted); }
+    .days-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem;
+    }
+    details.day {
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 22px;
+      padding: 1rem 1rem .7rem;
+      transition: .25s var(--ease);
+    }
+    details.day[open] { background: rgba(255,255,255,.045); border-color: rgba(240,215,99,.2); }
+    summary {
+      cursor: pointer; list-style: none;
+      display: flex; align-items: start; justify-content: space-between; gap: .8rem;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .day-number {
+      width: 44px; height: 44px; border-radius: 14px; flex: 0 0 auto;
+      display: grid; place-items: center; font-family: Outfit, sans-serif; font-weight: 800;
+      background: linear-gradient(135deg, rgba(134,213,102,.95), rgba(240,215,99,.95)); color: #13200f;
+    }
+    .day-head { flex: 1; }
+    .time-row { color: var(--yellow-2); font-weight: 700; margin-top: .2rem; font-size: .92rem; }
+    .day-meta { color: var(--muted); font-size: .9rem; margin-top: .35rem; }
+    .expand-icon {
+      color: var(--muted); font-size: 1.2rem; transition: .25s var(--ease);
+    }
+    details[open] .expand-icon { transform: rotate(45deg); color: var(--yellow); }
+
+    .meal-list { margin: .9rem 0 .35rem; padding-left: 1.1rem; }
+    .meal-list li { margin-bottom: .55rem; color: #edf8de; }
+    .day-footer {
+      display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .7rem; margin-top: .9rem;
+    }
+    .mini {
+      padding: .7rem .8rem; border-radius: 16px; background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    .mini strong { display: block; color: var(--yellow-2); font-size: .86rem; margin-bottom: .2rem; }
+    .mini span { color: var(--muted); font-size: .9rem; }
+
+    .steps { display: grid; gap: .9rem; }
+    .step {
+      display: grid; grid-template-columns: auto 1fr; gap: .9rem; align-items: start;
+      padding: .95rem 1rem; border-radius: 18px; background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.06);
+    }
+    .step-index {
+      width: 34px; height: 34px; border-radius: 50%; display: grid; place-items: center;
+      background: rgba(240,215,99,.18); color: var(--yellow); font-weight: 800;
+    }
+
+    table {
+      width: 100%; border-collapse: collapse; margin-top: 1rem;
+      border-radius: 18px; overflow: hidden;
+      background: rgba(255,255,255,.03);
+    }
+    th, td {
+      padding: .85rem .9rem; text-align: left; border-bottom: 1px solid rgba(255,255,255,.06);
+      font-size: .95rem;
+    }
+    th { background: rgba(240,215,99,.09); color: var(--yellow-2); font-family: Outfit, sans-serif; letter-spacing: .02em; }
+    tr:hover td { background: rgba(255,255,255,.025); }
+
+    .footer-note {
+      margin-top: 1.1rem; color: var(--muted); font-size: .92rem;
+      padding: 1rem 1.1rem; border-radius: 18px; background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .shopping-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: var(--gap);
+    }
+    .shopping-card {
+      position: relative;
+      padding: 1.2rem;
+      background: linear-gradient(180deg, rgba(13,31,19,.9), rgba(8,18,11,.84));
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .shopping-card::before {
+      content: "";
+      position: absolute; inset: 0 0 auto 0; height: 1px;
+      background: linear-gradient(90deg, rgba(134,213,102,0), rgba(240,215,99,.9), rgba(134,213,102,0));
+    }
+    .shopping-list {
+      display: grid;
+      gap: .65rem;
+      margin-top: 1rem;
+    }
+    .shopping-item {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: .8rem;
+      align-items: center;
+      padding: .75rem .85rem;
+      border-radius: 16px;
+      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.06);
+      transition: .2s var(--ease);
+    }
+    .shopping-item:hover { border-color: rgba(240,215,99,.22); transform: translateY(-1px); }
+    .shopping-item input {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--green);
+      cursor: pointer;
+    }
+    .shopping-item.checked {
+      background: rgba(134,213,102,.08);
+      border-color: rgba(134,213,102,.22);
+    }
+    .shopping-item.checked .shopping-name,
+    .shopping-item.checked .shopping-qty {
+      text-decoration: line-through;
+      opacity: .68;
+    }
+    .shopping-name { font-weight: 600; color: var(--text); }
+    .shopping-qty { color: var(--yellow-2); font-size: .92rem; text-align: right; }
+    .shopping-optional {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,.06);
+    }
+    .shopping-optional h4 {
+      margin: 0 0 .75rem;
+      font-family: Outfit, Inter, sans-serif;
+      font-size: 1rem;
+      color: var(--yellow-2);
+    }
+    .shopping-help {
+      color: var(--muted);
+      font-size: .92rem;
+      margin-top: .7rem;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(28px) scale(.985);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0) scale(1); }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0px) translateX(0px); }
+      50% { transform: translateY(-12px) translateX(-10px); }
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid, .overview-grid, .rules-grid, .supp-grid, .week-grid, .days-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 720px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      .day-footer { grid-template-columns: 1fr; }
+      th, td { font-size: .9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; scroll-behavior: auto !important; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">K</div>
+        <div>Keto 4-wekenplan · be-nl</div>
+      </div>
+      <nav class="topnav" aria-label="Snelle navigatie">
+        <a href="#overzicht">Overzicht</a>
+        <a href="#week1">Week 1</a>
+        <a href="#week2">Week 2</a>
+        <a href="#week3">Week 3</a>
+        <a href="#week4">Week 4</a>
+        <a href="#boodschappen">Boodschappen</a>
+        <a href="#regels">Regels</a>
+        <a href="#supplementen">Supplementen</a>
+        <a href="#lijst">Koolhydraatlijst</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow">Donker thema · groen + geel · duidelijk opgebouwd</div>
+          <h1>Keto in 4 weken, helder en praktisch.</h1>
+          <p class="lead">Een visueel opgebouwde Nederlandstalige gids met dagplanning, maaltijden in gram, noodsnacks, koolhydratentotaal, hometrainer-ritme, praktische regels, supplementen en een koolhydraatlijst onderaan.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#week1">Start bij week 1</a>
+            <a class="button button-secondary" href="#regels">Bekijk praktische regels</a>
+          </div>
+          <div class="tag-row">
+            <span class="tag">Week 1–4 opbouw</span>
+            <span class="tag">Intermittent fasting geleidelijk</span>
+            <span class="tag">Dag per dag uitgeschreven</span>
+          </div>
+        </div>
+        <aside class="hero-panel reveal">
+          <h3>Snelle samenvatting</h3>
+          <p class="muted">De opbouw verschuift van 3 maaltijden naar 2 maaltijden en eindigt in een 16:8-ritme. De groenten zijn bewust gekozen om de dagelijkse koolhydraten laag te houden.</p>
+          <div class="metric-grid">
+            <div class="metric"><div class="value">28</div><div class="label">dagen uitgewerkt</div></div>
+            <div class="metric"><div class="value">4</div><div class="label">weken met ritme-opbouw</div></div>
+            <div class="metric"><div class="value">10–17 g</div><div class="label">typische dagelijkse kh</div></div>
+            <div class="metric"><div class="value">15–35 min</div><div class="label">rustige hometrainer</div></div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="overzicht">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Opbouw in één oogopslag</h2>
+          <p class="section-copy">Het schema is bewust progressief: eerst stabiliteit, dan later ontbijt uitstellen, daarna 2 maaltijden, en uiteindelijk een vaste 16:8-structuur.</p>
+        </div>
+        <div class="overview-grid">
+          <article class="card reveal"><div class="kpi">Week 1</div><h3>3 maaltijden</h3><p class="muted">Ritme: 10:00 / 14:30 / 19:00. Focus op gewenning, vetverzadiging en stabiele keuzes.</p></article>
+          <article class="card reveal"><div class="kpi">Week 2</div><h3>Later ontbijt</h3><p class="muted">Ritme: 10:30 / 14:30–15:00 / 19:00. Op sommige dagen al 12:30 / 19:00.</p></article>
+          <article class="card reveal"><div class="kpi">Week 3</div><h3>Meestal 2 maaltijden</h3><p class="muted">Ritme: meestal 12:30 / 19:00. Minder eetmomenten, maar nog steeds praktisch.</p></article>
+          <article class="card reveal"><div class="kpi">Week 4</div><h3>16:8</h3><p class="muted">Ritme: 12:00 / 19:00. Vanaf hier krijg je een consistent vastenvenster.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="weeks"></section>
+
+    <section class="section" id="boodschappen">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Boodschappenlijst per week</h2>
+          <p class="section-copy">Ja, dat is mogelijk. Vink items af terwijl je winkelt. De vakjes blijven bewaard op dit toestel in je browser, zodat je in de supermarkt gewoon verder kunt doen.</p>
+        </div>
+        <div class="shopping-grid" id="shoppingLists"></div>
+      </div>
+    </section>
+
+    <section class="section" id="regels">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Korte praktische regels bij dit schema</h2>
+          <p class="section-copy">Hou het simpel, budgetvriendelijk en vol te houden. Deze afspraken zorgen dat je niet per ongeluk uit je plan glijdt.</p>
+        </div>
+        <div class="rules-grid">
+          <article class="card reveal"><h3>Vetten slim bijsturen</h3><p class="muted">Boter, olijfolie of mayo mag iets omhoog als je sneller honger krijgt, zolang er geen suiker in zit.</p></article>
+          <article class="card reveal"><h3>Noten blijven noodsnack</h3><p class="muted">Niet vrij snacken. Houd het bewust bij 10–15 g.</p></article>
+          <article class="card reveal"><h3>Zachte kazen klein houden</h3><p class="muted">Cottage cheese en roomkaas gebruik je in kleine porties omdat ze sneller oplopen in koolhydraten.</p></article>
+          <article class="card reveal"><h3>Hogere-kh groenten klein doseren</h3><p class="muted">Spruitjes, broccoli en sperziebonen zijn bewust kleiner geportioneerd zodat je onder 20 g blijft.</p></article>
+          <article class="card reveal"><h3>Veilige basisgroenten</h3><p class="muted">Witloof, bloemkool, spinazie, komkommer, sla, courgette en radijs zijn de veiligste budget-basis in dit plan.</p></article>
+          <article class="card reveal"><h3>Vasten rustig opbouwen</h3><p class="muted">Niet forceren in week 1. Eerst stabiliteit, dan pas langere eetpauzes.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="supplementen">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2>Supplementen per week</h2>
+          <p class="section-copy">Bewust eenvoudig gehouden. Hoge doseringen zijn hier niet het doel; consistentie wel.</p>
+        </div>
+        <div class="supp-grid">
+          <article class="card reveal"><h3>Week 1</h3><p class="muted">Vitamine D3 1000–2000 IU/dag bij eerste maaltijd; optioneel K2 90–120 mcg/dag; magnesium glycinate of citrate 200–350 mg rond 21:00; extra zout via eten of 1–2 mokken bouillon; visolie 500–1000 mg EPA+DHA alleen op dagen zonder sardines/makreel.</p></article>
+          <article class="card reveal"><h3>Week 2</h3><p class="muted">Zelfde als week 1.</p></article>
+          <article class="card reveal"><h3>Week 3</h3><p class="muted">Zelfde als week 2; optioneel creatine monohydraat 3–5 g/dag.</p></article>
+          <article class="card reveal"><h3>Week 4</h3><p class="muted">Zelfde als week 3; tijdens een sardine challenge is visolie niet nodig, magnesium en D3 wel.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container week-grid">
+        <article class="callout reveal">
+          <div class="section-head">
+            <h2>Wat doen tegen honger of eetdrang?</h2>
+            <p class="section-copy">Werk in deze volgorde. Je probeert eerst je systeem te kalmeren, pas daarna grijp je naar extra eten.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="step-index">1</div><div>500 mL water</div></div>
+            <div class="step"><div class="step-index">2</div><div>1 mok bouillon of water met wat zout</div></div>
+            <div class="step"><div class="step-index">3</div><div>Zwarte koffie of thee</div></div>
+            <div class="step"><div class="step-index">4</div><div>5 groene olijven</div></div>
+            <div class="step"><div class="step-index">5</div><div>30 g cheddar of 2 gekookte eieren</div></div>
+            <div class="step"><div class="step-index">6</div><div>1 blik sardines of makreel in olijfolie</div></div>
+            <div class="step"><div class="step-index">7</div><div>15 g noten uit je beste-keuze-lijst</div></div>
+            <div class="step"><div class="step-index">8</div><div>10 minuten rustig fietsen of wandelen</div></div>
+            <div class="step"><div class="step-index">9</div><div>Maak de volgende maaltijd vetter, niet per se groter in eiwit</div></div>
+          </div>
+        </article>
+        <article class="callout reveal">
+          <div class="section-head">
+            <h2>Wanneer starten met vasten?</h2>
+            <p class="section-copy">Praktische opbouw binnen jouw schema, zonder het meteen te zwaar te maken.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="step-index">1</div><div><strong>Week 1:</strong> niet vasten forceren.</div></div>
+            <div class="step"><div class="step-index">2</div><div><strong>Week 2:</strong> op dagen 10–14 mag ontbijt later als je echt geen honger hebt.</div></div>
+            <div class="step"><div class="step-index">3</div><div><strong>Week 3:</strong> meestal 2 maaltijden.</div></div>
+            <div class="step"><div class="step-index">4</div><div><strong>Week 4:</strong> vaste 16:8.</div></div>
+          </div>
+          <div class="footer-note">Dit sluit beter aan op de publieke Dr. Boz-lijn dan meteen lang vasten in week 1.</div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container week-grid">
+        <article class="callout reveal">
+          <div class="section-head">
+            <h2>72-uurs sardine challenge</h2>
+            <p class="section-copy">Voor jou best niet in week 1 of 2. Liever op dag 26–28 of zelfs pas na deze 4 weken als week 4 nog zwaar voelt.</p>
+          </div>
+          <div class="steps">
+            <div class="step"><div class="step-index">A</div><div><strong>Strikte Dr. Boz-versie:</strong> alleen sardines + water + zout.</div></div>
+            <div class="step"><div class="step-index">B</div><div>Sardines liefst in olijfolie. Eet zoveel blikken als nodig voor verzadiging.</div></div>
+            <div class="step"><div class="step-index">C</div><div>Voor gewone maaltijden mag je wisselen met makreel of tonijn in olie.</div></div>
+            <div class="step"><div class="step-index">D</div><div>Voor de strikte challenge: nee — zodra je wisselt, is het een aangepaste vis-reset.</div></div>
+          </div>
+        </article>
+        <article class="callout reveal">
+          <div class="section-head">
+            <h2>Optioneel: challenge in plaats van dagen 26–28</h2>
+            <p class="section-copy">Heel eenvoudig gehouden, met minimaal ritme en zeer rustige beweging.</p>
+          </div>
+          <table>
+            <thead><tr><th>Dag</th><th>Tijd</th><th>Wat je doet</th><th>Totaal kh</th><th>Hometrainer</th></tr></thead>
+            <tbody>
+              <tr><td>26</td><td>vrij</td><td>Alleen sardines, water, zout</td><td>vrijwel 0–2 g</td><td>10–15 min zeer rustig</td></tr>
+              <tr><td>27</td><td>vrij</td><td>Alleen sardines, water, zout</td><td>vrijwel 0–2 g</td><td>10–15 min zeer rustig</td></tr>
+              <tr><td>28</td><td>vrij</td><td>Alleen sardines, water, zout</td><td>vrijwel 0–2 g</td><td>10–15 min zeer rustig</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="lijst">
+      <div class="container reveal">
+        <div class="section-head">
+          <h2>Koolhydraatlijst</h2>
+          <p class="section-copy">Waarden hieronder zijn afgeronde totale koolhydraten per 100 g, rauw, zodat ze aansluiten bij de Dr. Boz-aanpak.</p>
+        </div>
+        <div class="week-grid">
+          <article class="card">
+            <h3>Groente / product</h3>
+            <table>
+              <thead><tr><th>Groente / product</th><th>Totale koolhydraten per 100 g</th></tr></thead>
+              <tbody id="vegTable"></tbody>
+            </table>
+          </article>
+          <article class="card">
+            <h3>Kaas</h3>
+            <table>
+              <thead><tr><th>Kaas</th><th>Totale koolhydraten per 100 g</th></tr></thead>
+              <tbody id="cheeseTable"></tbody>
+            </table>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const weeks = [
+      {
+        id: 'week1',
+        title: 'Week 1',
+        rhythm: '10:00 / 14:30 / 19:00',
+        note: 'Focus op ritme, verzadiging en een zachte start zonder vasten te forceren.',
+        days: [
+          { day: 1, times: '10:00 / 14:30 / 19:00', carbs: '±14 g', bike: '15 min rustig', snack: 'Pecannoten 15 g', meals: ['10:00 omelet: 3 eieren (~165 g), spinazie 50 g, cheddar 30 g, boter 10 g.', '14:30 sardinesalade: sardines 1 blik, uitgelekt 100–120 g, witloof 100 g, mayo 15 g.', '19:00 gehaktpan: varkensgehakt 150 g, witte kool 90 g, boter 10 g.'] },
+          { day: 2, times: '10:00 / 14:30 / 19:00', carbs: '±16 g', bike: '15 min rustig', snack: '5 groene olijven (25 g) of macadamia’s 15 g', meals: ['10:00 roerei: 3 eieren, bacon 40 g, courgette 75 g, boter 10 g.', '14:30 makreelsalade: makreel 1 blik 100–120 g, komkommer 80 g, radijs 50 g, roomkaas 30 g.', '19:00 kotelet + puree: varkenskotelet 180 g, bloemkool 100 g, boter 15 g, room 20 ml.'] },
+          { day: 3, times: '10:00 / 14:30 / 19:00', carbs: '±17 g', bike: '20 min rustig', snack: 'Walnoten 15 g', meals: ['10:00 omelet: 3 eieren, geitenkaas 30 g, spinazie 50 g, boter 10 g.', '14:30 slawraps: sla 60 g, varkensgehakt 120 g, cheddar 25 g, groene paprika 40 g, tomaat 40 g.', '19:00 broccoli-cheddarsoep: broccoli 100 g, cheddar 25 g, bacon 30 g, room 30 ml, boter 10 g.'] },
+          { day: 4, times: '10:00 / 14:30 / 19:00', carbs: '±15 g', bike: '20 min rustig', snack: 'Paranoten 2 stuks (~10 g)', meals: ['10:00 eieren met champignons: 3 eieren, champignons 75 g, parmezaan 20 g, boter 10 g.', '14:30 tonijnmayo: tonijn in olie 100 g, bleekselderij 80 g, mayo 15 g.', '19:00 witloofgratin: witloof 120 g, bacon 40 g, blauwe kaas 25 g, room 20 ml, boter 10 g.'] },
+          { day: 5, times: '10:00 / 14:30 / 19:00', carbs: '±17 g', bike: '20 min rustig', snack: 'Hazelnoten 15 g', meals: ['10:00 lichte schaal: 2 eieren (~110 g), cottage cheese 75 g, komkommer 70 g.', '14:30 salade: sla 60 g, komkommer 50 g, geitenkaas 30 g, groene olijven 25 g, olijfolie 10 g.', '19:00 courgettebootjes: courgette 150 g, varkensgehakt 150 g, parmezaan 20 g, boter 10 g.'] },
+          { day: 6, times: '10:00 / 14:30 / 19:00', carbs: '±14 g', bike: '25 min rustig', snack: 'Cheddar 30 g', meals: ['10:00 omelet: 3 eieren, cheddar 30 g, spinazie 50 g, boter 10 g.', '14:30 sardines + dip: sardines 100–120 g, radijs 50 g, roomkaas 30 g.', '19:00 kotelet + spruitjes: varkenskotelet 180 g, spruitjes 70 g, boter 15 g.'] },
+          { day: 7, times: '10:00 / 14:30 / 19:00', carbs: '±16 g', bike: '15 min hersteltempo', snack: 'Pecannoten 15 g', meals: ['10:00 bacon & eggs: 2 eieren, bacon 40 g, groene paprika 30 g, boter 10 g.', '14:30 sla-bowl: sla 60 g, blauwe kaas 25 g, avocado 30 g, olijfolie 10 g.', '19:00 bloemkoolrijstpan: bloemkool 100 g, varkensgehakt 150 g, champignons 75 g, boter 10 g.'] }
+        ]
+      },
+      {
+        id: 'week2',
+        title: 'Week 2',
+        rhythm: '10:30 / 14:30–15:00 / 19:00, en op sommige dagen al 12:30 / 19:00',
+        note: 'Later ontbijt waar mogelijk, maar alleen als de honger effectief meevalt.',
+        days: [
+          { day: 8, times: '10:30 / 15:00 / 19:00', carbs: '±14 g', bike: '20 min rustig', snack: 'Macadamia’s 15 g', meals: ['10:30 roerei: 3 eieren, champignons 75 g, cheddar 25 g, boter 10 g.', '15:00 makreel in slabootjes: sla 60 g, makreel 100–120 g, komkommer 50 g, mayo 15 g.', '19:00 gehakt-bloemkoolpan: varkensgehakt 150 g, bloemkool 100 g, boter 10 g.'] },
+          { day: 9, times: '10:30 / 14:30 / 19:00', carbs: '±16 g', bike: '20 min rustig', snack: 'Walnoten 15 g', meals: ['10:30 spek en eieren: 2 eieren, bacon 40 g, asperges 100 g, boter 10 g.', '14:30 bowl: radijs 50 g, komkommer 80 g, geitenkaas 30 g, olijfolie 10 g.', '19:00 kotelet + kool: varkenskotelet 180 g, witte kool 100 g, boter 15 g.'] },
+          { day: 10, times: '12:30 / 19:00', carbs: '±13 g', bike: '25 min rustig', snack: 'Cheddar 30 g of 5 olijven', meals: ['12:30 sardinesalade: sardines 100–120 g, witloof 100 g, mayo 15 g.', '19:00 broccoli-blauwekaassoep: broccoli 90 g, blauwe kaas 25 g, bacon 30 g, room 30 ml, boter 10 g.'] },
+          { day: 11, times: '12:30 / 19:00', carbs: '±13 g', bike: '25 min rustig', snack: 'Paranoten 2 stuks', meals: ['12:30 slawraps: sla 60 g, varkensgehakt 150 g, groene paprika 50 g, cheddar 25 g.', '19:00 bloemkoolgratin + eieren: bloemkool 100 g, parmezaan 20 g, 2 eieren, room 20 ml, boter 10 g.'] },
+          { day: 12, times: '10:30 optioneel / 14:30 / 19:00', carbs: '±11–14 g', bike: '25 min rustig', snack: 'Hazelnoten 15 g', meals: ['10:30 alleen bij honger: 2 eieren, roomkaas 40 g.', '14:30 tonijnsalade: tonijn 100 g, bleekselderij 100 g, mayo 15 g.', '19:00 kotelet met courgette: varkenskotelet 180 g, courgette 150 g, champignons 75 g, boter 15 g.'] },
+          { day: 13, times: '12:30 / 19:00', carbs: '±13 g', bike: '30 min rustig', snack: '5 olijven', meals: ['12:30 omelet: 3 eieren, geitenkaas 30 g, spinazie 50 g, komkommer 80 g.', '19:00 gehakt met sperziebonen: varkensgehakt 150 g, sperziebonen 80 g, bacon 30 g, boter 10 g.'] },
+          { day: 14, times: '12:30 / 19:00', carbs: '±15 g', bike: '20 min rustig', snack: 'Pecannoten 15 g', meals: ['12:30 schaal: cottage cheese 75 g, komkommer 80 g, 2 eieren.', '19:00 witloofschotel: witloof 120 g, bacon 40 g, cheddar 30 g, room 20 ml, boter 10 g.'] }
+        ]
+      },
+      {
+        id: 'week3',
+        title: 'Week 3',
+        rhythm: 'Meestal 12:30 / 19:00',
+        note: 'Vanaf hier wordt twee maaltijden per dag de standaard.',
+        days: [
+          { day: 15, times: '12:30 / 19:00', carbs: '±10 g', bike: '25 min rustig', snack: 'Macadamia’s 15 g', meals: ['12:30 roerei: 3 eieren, spinazie 50 g, geitenkaas 30 g, boter 10 g.', '19:00 gehakt + kool: varkensgehakt 170 g, witte kool 100 g, boter 15 g, cheddar 20 g.'] },
+          { day: 16, times: '12:30 / 19:00', carbs: '±12 g', bike: '25 min rustig', snack: 'Paranoten 2 stuks', meals: ['12:30 sardinesalade: sardines 100–120 g, komkommer 80 g, groene olijven 25 g, avocado 40 g, olijfolie 10 g.', '19:00 kotelet + puree: varkenskotelet 180 g, bloemkool 100 g, boter 15 g, room 20 ml.'] },
+          { day: 17, times: '12:30 / 19:00', carbs: '±13 g', bike: '30 min rustig', snack: 'Walnoten 15 g', meals: ['12:30 bacon-asperges: bacon 40 g, 2 eieren, asperges 100 g, parmezaan 15 g, boter 10 g.', '19:00 broccoli-cheddarpan: broccoli 100 g, varkensgehakt 150 g, cheddar 25 g, boter 10 g.'] },
+          { day: 18, times: '12:30 / 19:00', carbs: '±13 g', bike: '30 min rustig', snack: 'Cheddar 30 g', meals: ['12:30 tonijnbootjes: tonijn 100 g, bleekselderij 80 g, roomkaas 40 g.', '19:00 kotelet met saus: varkenskotelet 180 g, courgette 150 g, champignons 75 g, blauwe kaas 25 g, room 20 ml, boter 10 g.'] },
+          { day: 19, times: '12:30 / 19:00', carbs: '±11 g', bike: '30 min rustig', snack: 'Hazelnoten 15 g', meals: ['12:30 omelet: 3 eieren, rode paprika 30 g, cheddar 25 g, boter 10 g.', '19:00 witloof + spek: witloof 100 g, bacon 40 g, geitenkaas 30 g, spinazie 50 g, boter 10 g.'] },
+          { day: 20, times: '12:30 / 19:00', carbs: '±14 g', bike: '35 min rustig', snack: 'Pecannoten 15 g', meals: ['12:30 schaal: cottage cheese 75 g, komkommer 80 g, groene olijven 25 g, 2 eieren.', '19:00 bloemkoolrijstpan: bloemkool 100 g, bacon 30 g, varkensgehakt 150 g, boter 10 g.'] },
+          { day: 21, times: '12:30 / 19:00', carbs: '±11 g', bike: '20 min rustig', snack: 'Macadamia’s 15 g', meals: ['12:30 vis-salade: sardines of makreel 100–120 g, radijs 50 g, sla 60 g, roomkaas 30 g.', '19:00 kotelet + spruitjes: varkenskotelet 180 g, spruitjes 70 g, boter 15 g.'] }
+        ]
+      },
+      {
+        id: 'week4',
+        title: 'Week 4',
+        rhythm: '12:00 / 19:00 (16:8)',
+        note: 'Nu zit je in een vaste 16:8-structuur met twee duidelijke maaltijden.',
+        days: [
+          { day: 22, times: '12:00 / 19:00', carbs: '±10 g', bike: '30 min rustig', snack: '5 olijven', meals: ['12:00 omelet: 3 eieren, geitenkaas 30 g, spinazie 50 g, boter 10 g.', '19:00 courgettebootjes: courgette 150 g, varkensgehakt 150 g, parmezaan 20 g, boter 10 g.'] },
+          { day: 23, times: '12:00 / 19:00', carbs: '±12 g', bike: '30 min rustig', snack: 'Walnoten 15 g', meals: ['12:00 makreel in witloofbootjes: makreel 100–120 g, witloof 100 g, mayo 15 g.', '19:00 kotelet + puree: varkenskotelet 180 g, bloemkool 100 g, blauwe kaas 25 g, room 20 ml, boter 15 g.'] },
+          { day: 24, times: '12:00 / 19:00', carbs: '±14 g', bike: '35 min rustig', snack: 'Paranoten 2 stuks', meals: ['12:00 tonijnslawraps: tonijn 100 g, sla 60 g, komkommer 80 g, roomkaas 40 g.', '19:00 bacon-broccoli-cheddarsoep: broccoli 90 g, bacon 30 g, cheddar 25 g, room 20 ml, boter 10 g.'] },
+          { day: 25, times: '12:00 / 19:00', carbs: '±10 g', bike: '35 min rustig', snack: 'Macadamia’s 15 g', meals: ['12:00 bacon & eggs: 2 eieren, bacon 40 g, asperges 100 g, boter 10 g.', '19:00 gehakt-slaschaal: varkensgehakt 170 g, groene paprika 40 g, sla 60 g, olijfolie 10 g.'] },
+          { day: 26, times: '12:00 / 19:00', carbs: '±10 g', bike: '35 min rustig', snack: 'Pecannoten 15 g', meals: ['12:00 sardinesalade: sardines 100–120 g, komkommer 80 g, radijs 50 g, mayo 15 g.', '19:00 kotelet + kool: varkenskotelet 180 g, witte kool 100 g, boter 15 g.'] },
+          { day: 27, times: '12:00 / 19:00', carbs: '±11 g', bike: '35 min rustig', snack: 'Hazelnoten 15 g', meals: ['12:00 omelet: 3 eieren, geitenkaas 30 g, spinazie 50 g, boter 10 g.', '19:00 bloemkoolgratin: bloemkool 100 g, bacon 30 g, room 20 ml, cheddar 30 g, boter 10 g.'] },
+          { day: 28, times: '12:00 / 19:00', carbs: '±11 g', bike: '20 min rustig', snack: 'Cheddar 30 g', meals: ['12:00 makreelsalade: makreel 100–120 g, sla 60 g, komkommer 80 g, olijfolie 10 g.', '19:00 gehaktpan: varkensgehakt 170 g, champignons 75 g, courgette 150 g, boter 10 g.'] }
+        ]
+      }
+    ];
+
+    const shoppingLists = [
+      {
+        week: 'Week 1',
+        items: [
+          ['Eieren', '19 stuks'], ['Sardines in olie', '2 blikken'], ['Makreel in olie', '1 blik'], ['Tonijn in olie', '1 blik'], ['Varkensgehakt', '±570 g'], ['Varkenskoteletten', '±360 g'], ['Bacon', '±150 g'], ['Spinazie', '±150 g'], ['Witloof', '±220 g'], ['Witte kool', '±90 g'], ['Courgette', '±225 g'], ['Komkommer', '±200 g'], ['Radijs', '±100 g'], ['Bloemkool', '±200 g'], ['Sla', '±180 g'], ['Groene paprika', '±70 g'], ['Tomaat', '±40 g'], ['Broccoli', '±100 g'], ['Champignons', '±150 g'], ['Bleekselderij', '±80 g'], ['Spruitjes', '±70 g'], ['Avocado', '±30 g'], ['Groene olijven', '±25 g'], ['Cheddar', '±110 g'], ['Geitenkaas', '±60 g'], ['Parmezaan', '±40 g'], ['Blauwe kaas', '±50 g'], ['Roomkaas', '±60 g'], ['Cottage cheese', '±75 g'], ['Boter', '±140 g'], ['Room', '±70 ml'], ['Mayonaise', '±30 g'], ['Olijfolie', '±20 ml']
+        ],
+        optional: ['Pecannoten ±30 g', 'Macadamia’s ±15 g', 'Walnoten ±15 g', 'Hazelnoten ±15 g', 'Paranoten ±10 g', 'Extra cheddar ±30 g', 'Extra groene olijven ±25 g']
+      },
+      {
+        week: 'Week 2',
+        items: [
+          ['Eieren', '14 stuks'], ['Makreel in olie', '1 blik'], ['Sardines in olie', '1 blik'], ['Tonijn in olie', '1 blik'], ['Varkensgehakt', '±450 g'], ['Varkenskoteletten', '±360 g'], ['Bacon', '±140 g'], ['Champignons', '±150 g'], ['Cheddar', '±80 g'], ['Boter', '±100 g'], ['Sla', '±120 g'], ['Komkommer', '±290 g'], ['Mayonaise', '±45 g'], ['Bloemkool', '±200 g'], ['Asperges', '±100 g'], ['Radijs', '±50 g'], ['Geitenkaas', '±60 g'], ['Olijfolie', '±10 ml'], ['Witte kool', '±100 g'], ['Witloof', '±220 g'], ['Broccoli', '±90 g'], ['Blauwe kaas', '±25 g'], ['Room', '±70 ml'], ['Groene paprika', '±50 g'], ['Parmezaan', '±20 g'], ['Roomkaas', '±40 g'], ['Bleekselderij', '±100 g'], ['Courgette', '±150 g'], ['Spinazie', '±50 g'], ['Sperziebonen', '±80 g'], ['Cottage cheese', '±75 g']
+        ],
+        optional: ['Macadamia’s ±15 g', 'Walnoten ±15 g', 'Hazelnoten ±15 g', 'Pecannoten ±15 g', 'Paranoten ±10 g', 'Extra cheddar ±30 g', 'Groene olijven ±25–50 g']
+      },
+      {
+        week: 'Week 3',
+        items: [
+          ['Eieren', '10 stuks'], ['Sardines in olie', '1 blik'], ['Sardines of makreel in olie', '1 blik'], ['Tonijn in olie', '1 blik'], ['Varkensgehakt', '±470 g'], ['Varkenskoteletten', '±540 g'], ['Bacon', '±110 g'], ['Spinazie', '±100 g'], ['Geitenkaas', '±60 g'], ['Boter', '±115 g'], ['Witte kool', '±100 g'], ['Cheddar', '±70 g'], ['Komkommer', '±160 g'], ['Groene olijven', '±50 g'], ['Avocado', '±40 g'], ['Olijfolie', '±10 ml'], ['Bloemkool', '±200 g'], ['Room', '±40 ml'], ['Asperges', '±100 g'], ['Parmezaan', '±15 g'], ['Broccoli', '±100 g'], ['Bleekselderij', '±80 g'], ['Roomkaas', '±70 g'], ['Courgette', '±150 g'], ['Champignons', '±75 g'], ['Blauwe kaas', '±25 g'], ['Rode paprika', '±30 g'], ['Witloof', '±100 g'], ['Radijs', '±50 g'], ['Sla', '±60 g'], ['Spruitjes', '±70 g'], ['Cottage cheese', '±75 g']
+        ],
+        optional: ['Macadamia’s ±30 g', 'Walnoten ±15 g', 'Hazelnoten ±15 g', 'Pecannoten ±15 g', 'Paranoten ±10 g', 'Extra cheddar ±30 g']
+      },
+      {
+        week: 'Week 4',
+        items: [
+          ['Eieren', '8 stuks'], ['Makreel in olie', '2 blikken'], ['Sardines in olie', '1 blik'], ['Tonijn in olie', '1 blik'], ['Varkensgehakt', '±490 g'], ['Varkenskoteletten', '±360 g'], ['Bacon', '±100 g'], ['Geitenkaas', '±60 g'], ['Spinazie', '±100 g'], ['Boter', '±100 g'], ['Courgette', '±300 g'], ['Parmezaan', '±20 g'], ['Witloof', '±100 g'], ['Mayonaise', '±30 g'], ['Bloemkool', '±200 g'], ['Blauwe kaas', '±25 g'], ['Room', '±60 ml'], ['Sla', '±180 g'], ['Komkommer', '±240 g'], ['Roomkaas', '±40 g'], ['Broccoli', '±90 g'], ['Cheddar', '±55 g'], ['Asperges', '±100 g'], ['Groene paprika', '±40 g'], ['Olijfolie', '±20 ml'], ['Radijs', '±50 g'], ['Witte kool', '±100 g'], ['Champignons', '±75 g']
+        ],
+        optional: ['Walnoten ±15 g', 'Macadamia’s ±15 g', 'Pecannoten ±15 g', 'Hazelnoten ±15 g', 'Paranoten ±10 g', 'Extra cheddar ±30 g', 'Groene olijven ±25 g']
+      }
+    ];
+
+    const veg = [
+      ['Asperges', '3,9 g'], ['Spinazie', '3,7 g'], ['Bleekselderij', '3,0 g'], ['Sla', '2,9 g'], ['Avocado', '8,5 g'], ['Witte kool', '5,8 g'], ['Groene olijven', '3,9 g'], ['Komkommer', '3,0 g'], ['Bloemkool', '5,0 g'], ['Courgette', '3,1 g'], ['Tomaat', '3,9 g'], ['Groene paprika', '4,8 g'], ['Rode paprika', '6,7 g'], ['Broccoli', '6,6 g'], ['Spruitjes', '9,0 g'], ['Sperziebonen', '7,0 g'], ['Radijs', '3,4 g']
+    ];
+    const cheese = [
+      ['Zachte geitenkaas', '0,0 g'], ['Blauwe kaas', '2,5 g'], ['Roomkaas / Philadelphia-achtig, volvet', '4,6 g'], ['Parmezaan', '4,3 g'], ['Cheddar', '3,5 g'], ['Cottage cheese, volvet', '4,6 g']
+    ];
+
+    const shoppingMount = document.getElementById('shoppingLists');
+    const shoppingStateKey = 'keto-shopping-checks-v1';
+    const shoppingState = JSON.parse(localStorage.getItem(shoppingStateKey) || '{}');
+
+    function saveShoppingState() {
+      localStorage.setItem(shoppingStateKey, JSON.stringify(shoppingState));
+    }
+
+    shoppingLists.forEach((list, weekIndex) => {
+      const card = document.createElement('article');
+      card.className = 'shopping-card reveal';
+      const itemsHtml = list.items.map((item, itemIndex) => {
+        const id = `shop-${weekIndex}-${itemIndex}`;
+        const checked = !!shoppingState[id];
+        return `
+          <label class="shopping-item ${checked ? 'checked' : ''}" for="${id}">
+            <input type="checkbox" id="${id}" data-shop-id="${id}" ${checked ? 'checked' : ''}>
+            <span class="shopping-name">${item[0]}</span>
+            <span class="shopping-qty">${item[1]}</span>
+          </label>
+        `;
+      }).join('');
+      const optionalHtml = list.optional.map((item, itemIndex) => {
+        const id = `shop-opt-${weekIndex}-${itemIndex}`;
+        const checked = !!shoppingState[id];
+        return `
+          <label class="shopping-item ${checked ? 'checked' : ''}" for="${id}">
+            <input type="checkbox" id="${id}" data-shop-id="${id}" ${checked ? 'checked' : ''}>
+            <span class="shopping-name">${item}</span>
+            <span class="shopping-qty">optioneel</span>
+          </label>
+        `;
+      }).join('');
+
+      card.innerHTML = `
+        <div class="week-badge">${list.week}</div>
+        <h3 style="margin-top:.85rem;">Wekelijkse boodschappenlijst</h3>
+        <p class="shopping-help">Vink af wat al in je kar zit. Dit blijft lokaal opgeslagen in je browser op dit toestel.</p>
+        <div class="shopping-list">${itemsHtml}</div>
+        <div class="shopping-optional">
+          <h4>Optioneel voor noodsnacks</h4>
+          <div class="shopping-list">${optionalHtml}</div>
+        </div>
+      `;
+      shoppingMount.appendChild(card);
+    });
+
+    document.querySelectorAll('[data-shop-id]').forEach(input => {
+      input.addEventListener('change', () => {
+        const id = input.dataset.shopId;
+        shoppingState[id] = input.checked;
+        input.closest('.shopping-item')?.classList.toggle('checked', input.checked);
+        saveShoppingState();
+      });
+    });
+
+    const weeksMount = document.getElementById('weeks');
+    weeks.forEach(week => {
+      const section = document.createElement('section');
+      section.className = 'section';
+      section.id = week.id;
+      section.innerHTML = `
+        <div class="container reveal">
+          <div class="week-shell">
+            <div class="week-header">
+              <div>
+                <div class="week-badge">${week.title}</div>
+                <h2 style="margin-top:.75rem;">Ritme: ${week.rhythm}</h2>
+                <p class="week-note">${week.note}</p>
+              </div>
+            </div>
+            <div class="days-grid">
+              ${week.days.map(day => `
+                <details class="day">
+                  <summary>
+                    <div class="day-number">${day.day}</div>
+                    <div class="day-head">
+                      <h3>Dag ${day.day}</h3>
+                      <div class="time-row">${day.times}</div>
+                      <div class="day-meta">Keto-dag met vaste maaltijden, noodsnack enkel bij echte honger.</div>
+                    </div>
+                    <div class="expand-icon">+</div>
+                  </summary>
+                  <ul class="meal-list">
+                    ${day.meals.map(meal => `<li>${meal}</li>`).join('')}
+                  </ul>
+                  <div class="day-footer">
+                    <div class="mini"><strong>Noodsnack</strong><span>${day.snack}</span></div>
+                    <div class="mini"><strong>Totale kh</strong><span>${day.carbs}</span></div>
+                    <div class="mini"><strong>Hometrainer</strong><span>${day.bike}</span></div>
+                  </div>
+                </details>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+      weeksMount.appendChild(section);
+    });
+
+    document.getElementById('vegTable').innerHTML = veg.map(([name,val]) => `<tr><td>${name}</td><td>${val}</td></tr>`).join('');
+    document.getElementById('cheeseTable').innerHTML = cheese.map(([name,val]) => `<tr><td>${name}</td><td>${val}</td></tr>`).join('');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+      });
+    }, { threshold: 0.14 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Monte Madeiral Village — Owner Marketing Deck</title>
+  <link rel="preconnect" href="https://api.fontshare.com" />
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=clash-display@600,700&f[]=satoshi@400,500,700&display=swap" />
+  <style>
+    :root {
+      --bg-primary: #07111b;
+      --bg-secondary: #0f1d2e;
+      --bg-card: rgba(255,255,255,0.08);
+      --bg-card-strong: rgba(255,255,255,0.12);
+      --text-primary: #f7f3ea;
+      --text-secondary: #cdd6df;
+      --text-muted: #93a5b8;
+      --accent: #f1b24a;
+      --accent-2: #58c4b6;
+      --accent-3: #c96f4d;
+      --danger: #ff887a;
+      --line: rgba(255,255,255,0.12);
+      --shadow: 0 25px 60px rgba(0,0,0,0.35);
+      --font-display: 'Clash Display', sans-serif;
+      --font-body: 'Satoshi', sans-serif;
+      --title-size: clamp(1.8rem, 5vw, 4.6rem);
+      --h2-size: clamp(1.3rem, 3vw, 2.4rem);
+      --h3-size: clamp(1rem, 2vw, 1.35rem);
+      --body-size: clamp(0.82rem, 1.2vw, 1.02rem);
+      --small-size: clamp(0.68rem, 0.9vw, 0.86rem);
+      --slide-padding: clamp(1rem, 4vw, 3.75rem);
+      --content-gap: clamp(0.75rem, 2vw, 1.75rem);
+      --element-gap: clamp(0.35rem, 1vw, 0.9rem);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-normal: 0.7s;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; overflow-x: hidden; }
+    html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background:
+        radial-gradient(circle at 10% 20%, rgba(88, 196, 182, 0.14), transparent 25%),
+        radial-gradient(circle at 85% 15%, rgba(241, 178, 74, 0.14), transparent 28%),
+        radial-gradient(circle at 50% 100%, rgba(201, 111, 77, 0.14), transparent 30%),
+        linear-gradient(180deg, #06101a 0%, #0a1622 100%);
+      color: var(--text-primary);
+    }
+
+    .progress-bar {
+      position: fixed;
+      top: 0; left: 0;
+      height: 4px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      z-index: 100;
+      box-shadow: 0 0 18px rgba(241,178,74,0.55);
+    }
+
+    .nav-dots {
+      position: fixed;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      z-index: 90;
+    }
+
+    .nav-dot {
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.25);
+      background: rgba(255,255,255,0.18);
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
+    }
+
+    .nav-dot.active {
+      transform: scale(1.25);
+      background: var(--accent);
+      border-color: var(--accent);
+    }
+
+    .slide {
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding: var(--slide-padding);
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 1rem;
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .slide-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-height: 100%;
+      overflow: hidden;
+      gap: var(--content-gap);
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: var(--small-size);
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    h1, h2, h3 { font-family: var(--font-display); line-height: 0.95; }
+    h1 { font-size: var(--title-size); max-width: 11ch; }
+    h2 { font-size: var(--h2-size); }
+    h3 { font-size: var(--h3-size); }
+    p, li, td, th { font-size: var(--body-size); line-height: 1.45; }
+    p.subtle, .muted { color: var(--text-muted); }
+    .lead { max-width: 62ch; color: var(--text-secondary); }
+
+    .hero-grid, .two-col, .metric-grid, .card-grid, .timeline, .three-col {
+      display: grid;
+      gap: clamp(0.6rem, 1.5vw, 1rem);
+    }
+
+    .hero-grid { grid-template-columns: 1.2fr 0.9fr; align-items: end; }
+    .two-col { grid-template-columns: 1fr 1fr; align-items: stretch; }
+    .three-col { grid-template-columns: repeat(3, 1fr); }
+    .metric-grid { grid-template-columns: repeat(4, 1fr); }
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+    .timeline { grid-template-columns: repeat(4, 1fr); }
+
+    .card, .metric, .panel, .pill-list li, .timeline-step {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .card, .panel, .metric, .timeline-step { padding: 1rem; }
+    .metric strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2.8vw, 2.4rem);
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .metric span, .card p, .panel p, .panel li, .timeline-step p { color: var(--text-secondary); }
+
+    .pill-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.6rem;
+    }
+    .pill-list li { padding: 0.85rem 0.95rem; }
+
+    .bullet-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(0.45rem, 1vh, 0.95rem);
+      max-width: 65ch;
+    }
+    .bullet-list li {
+      display: grid;
+      grid-template-columns: 1.15rem 1fr;
+      gap: 0.65rem;
+      align-items: start;
+      color: var(--text-secondary);
+    }
+    .bullet-list li::before {
+      content: "◆";
+      color: var(--accent);
+      font-size: 0.8rem;
+      margin-top: 0.2rem;
+    }
+
+    .score-tag, .highlight {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.38rem 0.72rem;
+      border-radius: 999px;
+      background: rgba(241,178,74,0.14);
+      border: 1px solid rgba(241,178,74,0.24);
+      color: #ffd495;
+      font-size: var(--small-size);
+      font-weight: 700;
+    }
+
+    .table-wrap {
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      overflow: hidden;
+      background: rgba(9,18,28,0.7);
+      box-shadow: var(--shadow);
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 0.8rem 0.9rem; text-align: left; vertical-align: top; }
+    thead th {
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+      font-size: var(--small-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    tbody tr + tr td { border-top: 1px solid rgba(255,255,255,0.08); }
+    tbody td { color: var(--text-secondary); }
+
+    .danger-list li::before { color: var(--danger); content: "✕"; }
+    .good-list li::before { color: var(--accent-2); content: "✓"; }
+
+    .timeline-step {
+      min-height: 170px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      position: relative;
+    }
+
+    .timeline-step .month {
+      font-family: var(--font-display);
+      color: var(--accent-2);
+      font-size: 1.05rem;
+    }
+
+    .footer-note {
+      position: absolute;
+      left: var(--slide-padding);
+      bottom: calc(var(--slide-padding) * 0.62);
+      color: var(--text-muted);
+      font-size: var(--small-size);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity var(--duration-normal) var(--ease-out-expo), transform var(--duration-normal) var(--ease-out-expo);
+    }
+    .slide.visible .reveal { opacity: 1; transform: translateY(0); }
+    .slide.visible .reveal:nth-child(1) { transition-delay: 0.05s; }
+    .slide.visible .reveal:nth-child(2) { transition-delay: 0.12s; }
+    .slide.visible .reveal:nth-child(3) { transition-delay: 0.19s; }
+    .slide.visible .reveal:nth-child(4) { transition-delay: 0.26s; }
+    .slide.visible .reveal:nth-child(5) { transition-delay: 0.33s; }
+    .slide.visible .reveal:nth-child(6) { transition-delay: 0.40s; }
+
+    @media (max-height: 700px) {
+      :root {
+        --slide-padding: clamp(0.75rem, 3vw, 1.8rem);
+        --content-gap: clamp(0.45rem, 1.4vw, 0.9rem);
+        --title-size: clamp(1.45rem, 4.5vw, 2.8rem);
+        --h2-size: clamp(1.05rem, 2.7vw, 1.8rem);
+      }
+      .card, .panel, .metric, .timeline-step { padding: 0.8rem; }
+    }
+
+    @media (max-height: 600px) {
+      :root {
+        --slide-padding: clamp(0.55rem, 2.6vw, 1.25rem);
+        --body-size: clamp(0.7rem, 1vw, 0.9rem);
+      }
+      .nav-dots { display: none; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid, .two-col, .metric-grid, .card-grid, .timeline, .three-col { grid-template-columns: 1fr; }
+      h1 { max-width: none; }
+      .pill-list { grid-template-columns: 1fr; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.2s !important; }
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar" aria-hidden="true"></div>
+  <nav class="nav-dots" aria-label="Slide navigation"></nav>
+
+  <section class="slide visible">
+    <div class="slide-content hero-grid">
+      <div>
+        <div class="eyebrow reveal">Owner deck · Apr 2026–Mar 2027</div>
+        <h1 class="reveal">Monte Madeiral Village should launch as a boutique compound — not a generic hotel.</h1>
+        <p class="lead reveal">This deck turns the full marketing plan into the key decisions an owner needs to make: positioning, revenue model, launch channels, budget, and the first 90 days.</p>
+        <div class="highlight reveal">8 suites · 3 revenue engines · €36k annual marketing budget</div>
+        <p class="subtle reveal" style="margin-top:0.85rem; max-width:52ch;">Built to help the owner decide how to launch profitably, protect positioning, and avoid early dependence on discounting.</p>
+      </div>
+      <div class="panel reveal">
+        <h3>The core bet</h3>
+        <ul class="bullet-list good-list" style="margin-top:0.85rem;">
+          <li>Sell atmosphere, privacy, dining and occasions — not just beds.</li>
+          <li>Use OTAs and Google to borrow trust fast, then grow direct demand.</li>
+          <li>Protect ADR and build non-room revenue early.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-note">Monte Madeiral Village · Marketing Plan Summary</div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">01 · Executive call</div>
+      <h2 class="reveal">What matters most</h2>
+      <div class="metric-grid">
+        <div class="metric reveal"><strong>35%</strong><span>occupancy target by Month 6</span></div>
+        <div class="metric reveal"><strong>50%</strong><span>occupancy target by Month 12</span></div>
+        <div class="metric reveal"><strong>€65+</strong><span>ADR floor to protect positioning</span></div>
+        <div class="metric reveal"><strong>35%</strong><span>direct share target by Month 12</span></div>
+      </div>
+      <ul class="bullet-list reveal">
+        <li>The property wins in a small but defensible niche: intimate hillside stay, destination dining and small private occasions.</li>
+        <li>Rooms alone are too fragile for an 8-suite property, so stay + F&amp;B + events must all be activated from launch.</li>
+        <li>The commercial model should move from OTA-assisted trust to stronger direct booking and enquiry capture over time.</li>
+        <li>Owner focus should be on yield, trust and revenue mix — not occupancy at any cost.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content two-col">
+      <div>
+        <div class="eyebrow reveal">02 · Positioning</div>
+        <h2 class="reveal">The right market position</h2>
+        <p class="lead reveal">For couples, diaspora return visitors and private groups seeking a more intimate São Vicente experience, Monte Madeiral Village is the boutique hillside stay and social venue that combines privacy, Cape Verdean atmosphere, dining and memorable occasions.</p>
+        <div class="score-tag reveal">Different from city hotels and commodity rentals</div>
+      </div>
+      <div class="card reveal">
+        <h3>Why this position works</h3>
+        <ul class="bullet-list good-list" style="margin-top:0.8rem;">
+          <li>It fits the physical concept better than “standard hotel” messaging.</li>
+          <li>It supports premium perception without pretending to be luxury-for-luxury’s-sake.</li>
+          <li>It creates room for dining and event revenue, not just accommodation demand.</li>
+          <li>It gives the brand a more memorable story in a fragmented market.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content two-col">
+      <div class="panel reveal">
+        <div class="eyebrow">03 · Revenue model</div>
+        <h2>Three revenue engines</h2>
+        <ul class="pill-list" style="margin-top:1rem;">
+          <li><strong>Rooms</strong><br><span class="muted">Boutique stays, protected ADR, selective packages</span></li>
+          <li><strong>Food &amp; Beverage</strong><br><span class="muted">Breakfast, dining, terrace-led spend</span></li>
+          <li><strong>Private Occasions</strong><br><span class="muted">Birthdays, family dinners, small gatherings, intimate celebrations</span></li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <div class="eyebrow">04 · What not to do</div>
+        <h2>Commercial traps to avoid</h2>
+        <ul class="bullet-list danger-list" style="margin-top:1rem;">
+          <li>Do not position as a budget or mass-market hotel.</li>
+          <li>Do not compete on price before trust and product story are clear.</li>
+          <li>Do not rely on room nights alone.</li>
+          <li>Do not pour budget into broad Google Ads before launch assets are ready.</li>
+          <li>Do not allow slow WhatsApp follow-up to kill high-intent enquiries.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">05 · Priority audiences</div>
+      <h2 class="reveal">Who should we actively sell to?</h2>
+      <div class="card-grid">
+        <div class="card reveal"><h3>Boutique escape couples</h3><p>Travellers who shortlist on photos, atmosphere, dining and reviews. Best fit for direct stay positioning.</p></div>
+        <div class="card reveal"><h3>Diaspora return visitors</h3><p>People coming back for family, holidays or celebrations who want privacy, pride and a place to gather.</p></div>
+        <div class="card reveal"><h3>Private occasion organisers</h3><p>Locals and diaspora families looking for a small venue with food, atmosphere and easier logistics.</p></div>
+        <div class="card reveal"><h3>Culture-led travellers</h3><p>Guests who want a base that feels part of São Vicente, not a generic transit stay.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content two-col">
+      <div>
+        <div class="eyebrow reveal">06 · Channel strategy</div>
+        <h2 class="reveal">The launch stack</h2>
+        <ul class="bullet-list reveal">
+          <li><strong>SEO</strong> becomes Channel 1 because it compounds and reduces long-term OTA dependency.</li>
+          <li><strong>OTAs + Google Maps</strong> are essential at launch because they lend trust before brand pull exists.</li>
+          <li><strong>Meta Ads + WhatsApp</strong> are the primary paid engine for awareness, event leads and retargeting.</li>
+          <li><strong>Organic social</strong> supports visual desire, reviews, behind-the-scenes proof and event inspiration.</li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <h3>Owner takeaway</h3>
+        <p style="margin-top:0.7rem;">This is not a “run ads and hope” launch. The order matters:</p>
+        <ol class="bullet-list good-list" style="margin-top:0.7rem;">
+          <li>Build trust assets first.</li>
+          <li>Capture enquiries cleanly.</li>
+          <li>Then scale the channels that prove qualified demand.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">07 · Direct demand engine</div>
+      <h2 class="reveal">SEO priorities for Year 1</h2>
+      <div class="three-col">
+        <div class="card reveal"><h3>Core pages</h3><p>Homepage, stay/rooms, restaurant/terrace, events, location/access.</p></div>
+        <div class="card reveal"><h3>Intent pages</h3><p>Best boutique stay in São Vicente, romantic stay, event venue, what to do in São Vicente.</p></div>
+        <div class="card reveal"><h3>Trust systems</h3><p>Google Business Profile, structured data, review generation, fast bilingual mobile pages.</p></div>
+      </div>
+      <div class="metric-grid">
+        <div class="metric reveal"><strong>200–350</strong><span>organic sessions by Month 3</span></div>
+        <div class="metric reveal"><strong>700–900</strong><span>by Month 6</span></div>
+        <div class="metric reveal"><strong>1,100–1,300</strong><span>by Month 9</span></div>
+        <div class="metric reveal"><strong>1,500–1,900</strong><span>by Month 12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content two-col">
+      <div class="panel reveal">
+        <div class="eyebrow">08 · Paid media</div>
+        <h2>What paid should do</h2>
+        <ul class="bullet-list good-list" style="margin-top:0.85rem;">
+          <li>Create early awareness with strong visual storytelling.</li>
+          <li>Drive WhatsApp conversations for events and private occasions.</li>
+          <li>Retarget people who visited, engaged or watched.</li>
+          <li>Support high-intent search later, not from day one.</li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <div class="eyebrow">09 · Budget split</div>
+        <h2>Annual paid budgets</h2>
+        <div class="metric-grid" style="grid-template-columns:1fr 1fr; margin-top:0.9rem;">
+          <div class="metric"><strong>€8,400</strong><span>Meta Ads</span></div>
+          <div class="metric"><strong>€1,500</strong><span>Google Ads tests</span></div>
+        </div>
+        <p style="margin-top:0.85rem;" class="muted">Google Ads stays small until the website, reviews and landing pages are credible enough to convert.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">10 · Budget</div>
+      <h2 class="reveal">Recommended annual marketing budget: €36,000</h2>
+      <div class="table-wrap reveal">
+        <table>
+          <thead>
+            <tr><th>Area</th><th>Annual budget</th><th>Why it matters</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Brand, website, launch assets</td><td>€7,500</td><td>Commercial infrastructure: photos, video, pages, trust.</td></tr>
+            <tr><td>SEO &amp; content</td><td>€10,800</td><td>Main long-term demand engine.</td></tr>
+            <tr><td>Organic social production</td><td>€4,800</td><td>Visual demand, proof, repurposed paid creative.</td></tr>
+            <tr><td>Meta Ads</td><td>€8,400</td><td>Primary paid launch and retargeting engine.</td></tr>
+            <tr><td>Email / CRM / WhatsApp systems</td><td>€1,800</td><td>Capture, nurture, follow-up and reviews.</td></tr>
+            <tr><td>Google Ads tests</td><td>€1,500</td><td>Brand defense and high-intent experiments only.</td></tr>
+            <tr><td>Influencer / partnership / review ops</td><td>€1,200</td><td>Micro-trust and social proof acceleration.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">11 · First 90 days</div>
+      <h2 class="reveal">What needs to happen first</h2>
+      <div class="timeline">
+        <div class="timeline-step reveal"><div class="month">Month 1</div><p>Photo/video shoot, website launch, OTA setup, Google Business Profile, WhatsApp and tracking setup.</p></div>
+        <div class="timeline-step reveal"><div class="month">Months 1–3</div><p>SEO fundamentals, core pages, launch social content, awareness campaigns, review SOP.</p></div>
+        <div class="timeline-step reveal"><div class="month">Months 2–3</div><p>Events/private occasions page, WhatsApp-led campaign, refine packages and response flow.</p></div>
+        <div class="timeline-step reveal"><div class="month">Month 3+</div><p>Retargeting, review-led optimisation, package testing, better direct capture.</p></div>
+      </div>
+      <div class="score-tag reveal">If launch assets are weak, all later marketing becomes less efficient.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content two-col">
+      <div>
+        <div class="eyebrow reveal">12 · Operational risk</div>
+        <h2 class="reveal">The biggest non-marketing risk is response speed.</h2>
+        <ul class="bullet-list reveal">
+          <li>A strong campaign fails if WhatsApp and event enquiries sit unanswered.</li>
+          <li>The business needs fast, warm, commercially confident follow-up during business hours.</li>
+          <li>Review generation must be operational, not occasional.</li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <h3>Minimum operating standard</h3>
+        <ul class="bullet-list good-list" style="margin-top:0.8rem;">
+          <li>Reply to hot enquiries within 1 hour.</li>
+          <li>Have event package examples ready.</li>
+          <li>Track WhatsApp clicks, calls and forms.</li>
+          <li>Ask every satisfied guest for a review.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content">
+      <div class="eyebrow reveal">13 · Success metrics</div>
+      <h2 class="reveal">What the owner should monitor monthly</h2>
+      <div class="card-grid">
+        <div class="card reveal"><h3>Revenue quality</h3><p>Occupancy, ADR, package uptake, event revenue, direct share.</p></div>
+        <div class="card reveal"><h3>Demand generation</h3><p>Organic sessions, brand search, Meta enquiry cost, WhatsApp qualified leads.</p></div>
+        <div class="card reveal"><h3>Trust signals</h3><p>Review count, average rating, photo/video quality, landing page performance.</p></div>
+        <div class="card reveal"><h3>Decision triggers</h3><p>If occupancy is under 20% by Month 4 or reviews drop below 4.3, adjust fast.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <div class="slide-content two-col">
+      <div>
+        <div class="eyebrow reveal">14 · Final recommendation</div>
+        <h2 class="reveal">The smart launch path</h2>
+        <ul class="bullet-list good-list reveal">
+          <li>Launch as a boutique compound with a clear emotional and commercial story.</li>
+          <li>Use OTAs and Google to build trust, but invest early in direct infrastructure.</li>
+          <li>Treat events and dining as core revenue lines, not side products.</li>
+          <li>Protect pricing. Competing on cheapness weakens the whole model.</li>
+        </ul>
+      </div>
+      <div class="panel reveal">
+        <h3>Owner decision</h3>
+        <p style="margin-top:0.8rem;">If you accept this positioning, the next step is simple: execute the first 30-day action list hard and make response speed non-negotiable.</p>
+        <div class="highlight" style="margin-top:1rem;">Position right first. Scale second.</div>
+      </div>
+    </div>
+    <div class="footer-note">Prepared from the full Monte Madeiral Village marketing plan</div>
+  </section>
+
+  <script>
+    class SlidePresentation {
+      constructor() {
+        this.slides = [...document.querySelectorAll('.slide')];
+        this.progressBar = document.querySelector('.progress-bar');
+        this.nav = document.querySelector('.nav-dots');
+        this.current = 0;
+        this.isScrolling = false;
+        this.touchStartY = 0;
+        this.touchEndY = 0;
+        this.createDots();
+        this.bindEvents();
+        this.observeSlides();
+        this.updateUI();
+      }
+
+      createDots() {
+        this.slides.forEach((_, index) => {
+          const btn = document.createElement('button');
+          btn.className = 'nav-dot';
+          btn.setAttribute('aria-label', `Go to slide ${index + 1}`);
+          btn.addEventListener('click', () => this.goTo(index));
+          this.nav.appendChild(btn);
+        });
+      }
+
+      bindEvents() {
+        window.addEventListener('keydown', (e) => {
+          if (['ArrowDown', 'ArrowRight', 'PageDown', ' '].includes(e.key)) {
+            e.preventDefault();
+            this.next();
+          }
+          if (['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key)) {
+            e.preventDefault();
+            this.prev();
+          }
+          if (e.key === 'Home') this.goTo(0);
+          if (e.key === 'End') this.goTo(this.slides.length - 1);
+        });
+
+        window.addEventListener('wheel', (e) => {
+          if (this.isScrolling) return;
+          if (Math.abs(e.deltaY) < 20) return;
+          this.isScrolling = true;
+          e.deltaY > 0 ? this.next() : this.prev();
+          setTimeout(() => this.isScrolling = false, 650);
+        }, { passive: false });
+
+        window.addEventListener('touchstart', (e) => {
+          this.touchStartY = e.changedTouches[0].screenY;
+        }, { passive: true });
+
+        window.addEventListener('touchend', (e) => {
+          this.touchEndY = e.changedTouches[0].screenY;
+          const diff = this.touchStartY - this.touchEndY;
+          if (Math.abs(diff) < 50) return;
+          diff > 0 ? this.next() : this.prev();
+        }, { passive: true });
+
+        document.addEventListener('scroll', () => this.updateFromScroll(), { passive: true });
+        window.addEventListener('resize', () => this.updateUI(), { passive: true });
+      }
+
+      observeSlides() {
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              this.current = this.slides.indexOf(entry.target);
+              this.updateUI();
+            }
+          });
+        }, { threshold: 0.55 });
+
+        this.slides.forEach(slide => observer.observe(slide));
+      }
+
+      updateFromScroll() {
+        const index = Math.round(window.scrollY / window.innerHeight);
+        if (index !== this.current && index >= 0 && index < this.slides.length) {
+          this.current = index;
+          this.updateUI();
+        }
+      }
+
+      goTo(index) {
+        this.current = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides[this.current].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        this.updateUI();
+      }
+
+      next() { this.goTo(this.current + 1); }
+      prev() { this.goTo(this.current - 1); }
+
+      updateUI() {
+        const dots = [...document.querySelectorAll('.nav-dot')];
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === this.current));
+        const progress = ((this.current + 1) / this.slides.length) * 100;
+        this.progressBar.style.width = `${progress}%`;
+      }
+    }
+
+    new SlidePresentation();
+  </script>
+</body>
+</html>
